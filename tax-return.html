@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <title>CRA Tax Return Detail</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="assets/css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <a class="skip-link btn btn-light" href="#main-content">Skip to main content</a>
+    <div class="protected-banner py-2 text-center fw-semibold">Protected B • Sensitive identifiers are masked by default • Access is logged</div>
+    <header>
+      <nav class="navbar navbar-expand-lg app-navbar no-print" aria-label="Top navigation">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-semibold" href="index.html">CRA Audit Workspace</a>
+          <div class="d-flex align-items-center gap-2">
+            <span class="navbar-text">Role: Auditor</span>
+            <button class="btn btn-outline-light btn-sm" id="localeToggle" type="button">Français</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container-fluid py-4">
+      <div class="row g-4">
+        <aside class="col-lg-2 sidebar-shell no-print">
+          <nav class="card content-card sidebar-nav p-3" aria-label="Tax return sections">
+            <h2 class="h6 text-uppercase text-secondary">Return sections</h2>
+            <ul class="nav nav-pills flex-column gap-1">
+              <li class="nav-item"><a class="nav-link active" href="#summary">Taxpayer summary</a></li>
+              <li class="nav-item"><a class="nav-link" href="#overview">Return overview</a></li>
+              <li class="nav-item"><a class="nav-link" href="#line-details">Line details</a></li>
+              <li class="nav-item"><a class="nav-link" href="#drill-down">Drill-down</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <main class="col-lg-10" id="main-content">
+          <nav aria-label="breadcrumb" class="no-print">
+            <ol class="breadcrumb">
+              <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+              <li class="breadcrumb-item"><a href="audit-file.html">Audit file</a></li>
+              <li class="breadcrumb-item active" aria-current="page">Return detail</li>
+            </ol>
+          </nav>
+
+          <section class="card content-card mb-4" id="summary">
+            <div class="card-body">
+              <div class="d-flex flex-wrap justify-content-between gap-3">
+                <div>
+                  <h1 class="h2 mb-1">Taxpayer summary</h1>
+                  <p class="mb-3 text-secondary">Individual T1 review for tax year 2023</p>
+                </div>
+                <div class="alert alert-info mb-0 no-print" role="status">Read-only reviewer views can be provisioned with masked content only.</div>
+              </div>
+              <div class="row g-3">
+                <div class="col-md-3"><div class="border rounded p-3 h-100"><div class="data-label">Name</div><div class="fs-5">Amélie Roy</div></div></div>
+                <div class="col-md-3"><div class="border rounded p-3 h-100"><div class="data-label">SIN</div><div>*** *** 421 <button class="btn btn-sm btn-outline-secondary ms-2 no-print" type="button" data-mask-toggle="sin-full" data-status-target="sin-status" data-sensitive-endpoint="/api/taxpayers/amelie-roy/sin?view=full" data-show-label="Show full SIN" data-hide-label="Hide full SIN" aria-pressed="false">Show full SIN</button></div><div id="sin-full" class="sensitive-value mt-2" hidden></div><div id="sin-status" class="small text-secondary mt-2" role="status" aria-live="polite">Full value requires explicit authorized reveal.</div></div></div>
+                <div class="col-md-3"><div class="border rounded p-3 h-100"><div class="data-label">Filing year</div><div class="fs-5">2023</div></div></div>
+                <div class="col-md-3"><div class="border rounded p-3 h-100"><div class="data-label">Status</div><div class="fs-5">Planning</div></div></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="row g-4 mb-4" id="overview">
+            <div class="col-md-3"><div class="card content-card h-100"><div class="card-body"><div class="data-label">Income</div><div class="display-6">$124,200</div></div></div></div>
+            <div class="col-md-3"><div class="card content-card h-100"><div class="card-body"><div class="data-label">Deductions</div><div class="display-6">$28,450</div></div></div></div>
+            <div class="col-md-3"><div class="card content-card h-100"><div class="card-body"><div class="data-label">Credits</div><div class="display-6">$6,180</div></div></div></div>
+            <div class="col-md-3"><div class="card content-card h-100"><div class="card-body"><div class="data-label">Tax payable/(refund)</div><div class="display-6">$8,960</div></div></div></div>
+          </section>
+
+          <section class="card content-card mb-4" id="line-details">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                <h2 class="h4 mb-0">Line-by-line return details</h2>
+                <a href="notes-evidence.html" class="btn btn-outline-primary no-print">Open notes & evidence</a>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-striped align-middle">
+                  <thead>
+                    <tr>
+                      <th scope="col">Line</th>
+                      <th scope="col">Description</th>
+                      <th scope="col">Filed amount</th>
+                      <th scope="col">Audit view</th>
+                      <th scope="col">Drill-down</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>10100</td>
+                      <td>Employment income</td>
+                      <td>$86,000</td>
+                      <td>Matches T4 slip totals</td>
+                      <td><a href="#drill-down">Review source</a></td>
+                    </tr>
+                    <tr>
+                      <td>21200</td>
+                      <td>Annual union dues</td>
+                      <td>$1,920</td>
+                      <td>Receipt required for variance above prior year</td>
+                      <td><a href="#drill-down">Open variance view</a></td>
+                    </tr>
+                    <tr>
+                      <td>22900</td>
+                      <td>Other employment expenses</td>
+                      <td>$9,800</td>
+                      <td><span class="badge text-bg-danger">Flagged</span> exceeds employer declaration support</td>
+                      <td><a href="#drill-down">Open expenses detail</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+
+          <section class="card content-card" id="drill-down">
+            <div class="card-body">
+              <h2 class="h4">Drill-down review</h2>
+              <div class="accordion" id="lineAccordion">
+                <div class="accordion-item">
+                  <h3 class="accordion-header" id="headingLine22900">
+                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseLine22900" aria-expanded="true" aria-controls="collapseLine22900">Line 22900 - Expense support review</button>
+                  </h3>
+                  <div id="collapseLine22900" class="accordion-collapse collapse show" aria-labelledby="headingLine22900" data-bs-parent="#lineAccordion">
+                    <div class="accordion-body">
+                      <p>Compare T2200 declaration, invoices, and mileage logs. Potential personal-use overlap identified in travel receipts.</p>
+                      <div class="row g-3">
+                        <div class="col-md-4"><div class="border rounded p-3 h-100"><div class="data-label">Evidence gap</div><p class="mb-0">3 receipts missing vendor GST/HST number.</p></div></div>
+                        <div class="col-md-4"><div class="border rounded p-3 h-100"><div class="data-label">Anomaly</div><p class="mb-0">Expenses grew 210% while employment income remained stable.</p></div></div>
+                        <div class="col-md-4"><div class="border rounded p-3 h-100"><div class="data-label">Next action</div><p class="mb-0">Request clarification and supporting records from taxpayer representative.</p></div></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
