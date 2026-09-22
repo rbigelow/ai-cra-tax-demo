@@ -30,7 +30,7 @@
           <p class="mb-0 text-secondary">Report draft for AU-2025-0148 • Ready for supervisory review</p>
         </div>
         <div class="d-flex gap-2">
-          <button class="btn btn-primary" type="button" data-generate-report="AU-2025-0148">Download PDF</button>
+          <button class="btn btn-primary" type="button" data-generate-report="AU-2025-0148" data-status-target="audit-report-status">Download PDF</button>
           <button class="btn btn-outline-secondary" type="button" data-print-report>Print</button>
         </div>
       </div>
@@ -96,7 +96,7 @@
         <div class="card-body">
           <h2 class="h4">Taxpayer communication summary</h2>
           <p class="mb-3">A fairness package and proposed reassessment summary should be shared through approved CRA channels only. Placeholder links to official correspondence templates and policy memos would be surfaced here.</p>
-          <p class="mb-0 text-secondary" data-report-status>Report status: Draft summary generated; secure PDF generation placeholder pending backend integration.</p>
+          <p class="mb-0 text-secondary" id="audit-report-status" data-report-status role="status" aria-live="polite">Report status: Draft summary generated; secure PDF generation placeholder pending backend integration.</p>
         </div>
       </section>
     </main>

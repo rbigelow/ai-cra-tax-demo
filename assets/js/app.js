@@ -127,7 +127,7 @@
         if (result.ok) {
           const status = form.querySelector('[data-note-status]');
           if (status) {
-            status.textContent = `Saved ${new Date(result.updatedAt).toLocaleString()}`;
+            status.textContent = `Note saved at ${new Date(result.updatedAt).toLocaleString()}`;
           }
         }
       });
@@ -149,7 +149,9 @@
           return;
         }
         const auditId = button.dataset.generateReport;
-        const status = document.querySelector('[data-report-status]');
+        const status = button.dataset.statusTarget
+          ? document.getElementById(button.dataset.statusTarget)
+          : document.querySelector('[data-report-status]');
         const result = await generateAuditReport(auditId);
         if (status && result.ok) {
           status.textContent = `Report ready: ${result.downloadUrl}`;

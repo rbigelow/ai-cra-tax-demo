@@ -159,14 +159,14 @@
             <div class="card-body">
               <div class="d-flex flex-wrap justify-content-between gap-3 mb-3">
                 <h2 class="h4 mb-0">End products</h2>
-                <button class="btn btn-primary no-print" data-generate-report="AU-2025-0148" type="button" data-bs-toggle="modal" data-bs-target="#exportWarningModal">Generate report</button>
+                <button class="btn btn-primary no-print" data-generate-report="AU-2025-0148" data-status-target="audit-file-report-status" type="button" data-bs-toggle="modal" data-bs-target="#exportWarningModal">Generate report</button>
               </div>
               <div class="row g-3">
                 <div class="col-md-4"><div class="border rounded p-3 h-100"><div class="data-label">Proposed reassessment</div><p class="mb-0">Increase taxable income by $84,000 pending final review.</p></div></div>
                 <div class="col-md-4"><div class="border rounded p-3 h-100"><div class="data-label">Adjustments</div><p class="mb-0">Disallow unsupported contractor expenses and shareholder travel claims.</p></div></div>
                 <div class="col-md-4"><div class="border rounded p-3 h-100"><div class="data-label">Taxpayer communication</div><p class="mb-0">Draft summary prepared for fairness letter and representative discussion.</p></div></div>
               </div>
-              <p class="mt-3 mb-0 text-secondary" data-report-status>Report status: Not yet generated.</p>
+              <p class="mt-3 mb-0 text-secondary" id="audit-file-report-status" data-report-status role="status" aria-live="polite">Report status: Not yet generated.</p>
             </div>
           </section>
         </main>
@@ -185,7 +185,7 @@
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancel</button>
-            <button type="button" class="btn btn-primary" data-generate-report="AU-2025-0148">Acknowledge and continue</button>
+            <button type="button" class="btn btn-primary" data-generate-report="AU-2025-0148" data-status-target="audit-file-report-status">Acknowledge and continue</button>
           </div>
         </div>
       </div>
