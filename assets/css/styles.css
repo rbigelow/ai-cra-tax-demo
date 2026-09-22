@@ -53,6 +53,9 @@ body {
 .sidebar-nav .nav-link:hover {
   background-color: rgba(166, 25, 46, 0.08);
   color: var(--cra-red);
+  outline: 2px solid rgba(166, 25, 46, 0.45);
+  outline-offset: 2px;
+  text-decoration: underline;
 }
 
 .content-card {

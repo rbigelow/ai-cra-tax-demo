@@ -12,7 +12,8 @@
     // Backend integration placeholder:
     // Send immutable audit trail entries with timestamp, user ID, IP/session identifier,
     // action description, and object metadata to a secure logging service.
-    console.info('[audit-log-placeholder]', action, details);
+    void action;
+    void details;
   }
 
   async function loadAuditData(endpoint, target) {
@@ -121,7 +122,13 @@
             target.removeAttribute('hidden');
             const revealResult = await loadSensitiveValue(button.dataset.sensitiveEndpoint);
             if (!revealResult.ok) {
-              target.textContent = revealResult.message;
+              target.setAttribute('hidden', 'hidden');
+              const statusTarget = button.dataset.statusTarget
+                ? document.getElementById(button.dataset.statusTarget)
+                : null;
+              if (statusTarget) {
+                statusTarget.textContent = revealResult.message;
+              }
               button.setAttribute('aria-pressed', 'false');
               button.textContent = button.dataset.showLabel || 'Show';
               auditLog('sensitive_identifier_reveal_unavailable', {
@@ -132,6 +139,12 @@
             }
             target.textContent = revealResult.value;
             target.dataset.loaded = 'true';
+            const statusTarget = button.dataset.statusTarget
+              ? document.getElementById(button.dataset.statusTarget)
+              : null;
+            if (statusTarget) {
+              statusTarget.textContent = 'Full value loaded for this session.';
+            }
             button.setAttribute('aria-pressed', 'true');
             button.textContent = button.dataset.hideLabel || 'Hide';
             auditLog('sensitive_identifier_revealed', {
@@ -141,6 +154,12 @@
             return;
           } else {
             target.removeAttribute('hidden');
+            const statusTarget = button.dataset.statusTarget
+              ? document.getElementById(button.dataset.statusTarget)
+              : null;
+            if (statusTarget) {
+              statusTarget.textContent = 'Previously loaded full value displayed.';
+            }
             button.setAttribute('aria-pressed', 'true');
             button.textContent = button.dataset.hideLabel || 'Hide';
             auditLog('sensitive_identifier_reshown', { target: button.dataset.maskToggle });
@@ -149,6 +168,12 @@
         }
 
         target.setAttribute('hidden', 'hidden');
+        const statusTarget = button.dataset.statusTarget
+          ? document.getElementById(button.dataset.statusTarget)
+          : null;
+        if (statusTarget) {
+          statusTarget.textContent = 'Full value hidden.';
+        }
         button.setAttribute('aria-pressed', 'false');
         button.textContent = button.dataset.showLabel || 'Show';
         auditLog('sensitive_identifier_hidden', { target: button.dataset.maskToggle });
