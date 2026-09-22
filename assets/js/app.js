@@ -88,10 +88,16 @@
         throw new Error(`Reveal failed: ${response.status}`);
       }
       const payload = await response.json();
-      return payload.value || 'Secure value unavailable';
+      const hasValue = payload && Object.prototype.hasOwnProperty.call(payload, 'value');
+      return hasValue
+        ? { ok: true, value: payload.value }
+        : { ok: false, message: 'Secure value unavailable.' };
     } catch (error) {
       auditLog('sensitive_identifier_reveal_placeholder', { endpoint, message: error.message });
-      return 'Full value available after secure backend integration.';
+      return {
+        ok: false,
+        message: 'Full value available after secure backend integration.',
+      };
     }
   }
 
@@ -113,20 +119,33 @@
           if (!target.dataset.loaded && button.dataset.sensitiveEndpoint) {
             target.textContent = 'Loading secure value…';
             target.removeAttribute('hidden');
-            const revealedValue = await loadSensitiveValue(button.dataset.sensitiveEndpoint);
-            target.textContent = revealedValue;
+            const revealResult = await loadSensitiveValue(button.dataset.sensitiveEndpoint);
+            if (!revealResult.ok) {
+              target.textContent = revealResult.message;
+              button.setAttribute('aria-pressed', 'false');
+              button.textContent = button.dataset.showLabel || 'Show';
+              auditLog('sensitive_identifier_reveal_unavailable', {
+                target: button.dataset.maskToggle,
+                source: button.dataset.sensitiveEndpoint,
+              });
+              return;
+            }
+            target.textContent = revealResult.value;
             target.dataset.loaded = 'true';
+            button.setAttribute('aria-pressed', 'true');
+            button.textContent = button.dataset.hideLabel || 'Hide';
+            auditLog('sensitive_identifier_revealed', {
+              target: button.dataset.maskToggle,
+              source: button.dataset.sensitiveEndpoint,
+            });
+            return;
           } else {
             target.removeAttribute('hidden');
+            button.setAttribute('aria-pressed', 'true');
+            button.textContent = button.dataset.hideLabel || 'Hide';
+            auditLog('sensitive_identifier_reshown', { target: button.dataset.maskToggle });
+            return;
           }
-          target.removeAttribute('hidden');
-          button.setAttribute('aria-pressed', 'true');
-          button.textContent = button.dataset.hideLabel || 'Hide';
-          auditLog('sensitive_identifier_revealed', {
-            target: button.dataset.maskToggle,
-            source: button.dataset.sensitiveEndpoint || 'inline-placeholder',
-          });
-          return;
         }
 
         target.setAttribute('hidden', 'hidden');
