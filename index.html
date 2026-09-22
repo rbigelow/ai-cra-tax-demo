@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <title>CRA Audit Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="assets/css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <a class="skip-link btn btn-light" href="#main-content">Skip to main content</a>
+    <div class="protected-banner py-2 text-center fw-semibold">Protected B • CRA confidential tax information • Export and printing are monitored</div>
+    <header>
+      <nav class="navbar navbar-expand-lg app-navbar no-print" aria-label="Top navigation">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-semibold" href="index.html">CRA Audit Workspace</a>
+          <button class="navbar-toggler bg-light" type="button" data-bs-toggle="collapse" data-bs-target="#topNav" aria-controls="topNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="topNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item"><a class="nav-link active" aria-current="page" href="index.html">Dashboard</a></li>
+              <li class="nav-item"><a class="nav-link" href="audit-file.html">Assigned file</a></li>
+              <li class="nav-item"><a class="nav-link" href="audit-report.html">Reports</a></li>
+            </ul>
+            <div class="d-flex align-items-center gap-2">
+              <span class="navbar-text">Role: Auditor / Vérificateur</span>
+              <button class="btn btn-outline-light btn-sm" id="localeToggle" type="button">Français</button>
+            </div>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <div class="container-fluid py-4">
+      <div class="row g-4">
+        <aside class="col-lg-2 sidebar-shell no-print">
+          <nav class="card content-card sidebar-nav p-3" aria-label="Audit navigation">
+            <h2 class="h6 text-uppercase text-secondary">Audit sections / Sections d'audit</h2>
+            <ul class="nav nav-pills flex-column gap-1">
+              <li class="nav-item"><a class="nav-link active" href="index.html">Assigned audits</a></li>
+              <li class="nav-item"><a class="nav-link" href="audit-file.html#planning">Planning</a></li>
+              <li class="nav-item"><a class="nav-link" href="audit-file.html#conducting">Conducting</a></li>
+              <li class="nav-item"><a class="nav-link" href="audit-file.html#law">Application of law</a></li>
+              <li class="nav-item"><a class="nav-link" href="audit-file.html#end-products">End products</a></li>
+            </ul>
+          </nav>
+        </aside>
+
+        <main class="col-lg-10" id="main-content">
+          <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-3">
+            <div>
+              <h1 class="h2 mb-1">Assigned audit dashboard</h1>
+              <p class="text-secondary mb-0">Review CRA audit files assigned to your team with least-privilege access controls.</p>
+            </div>
+            <div class="alert alert-warning alert-export mb-0 no-print" role="alert">
+              Exported or printed records must follow PIPEDA, Income Tax Act retention, and CRA ITAM handling requirements.
+            </div>
+          </div>
+
+          <section class="card content-card mb-4" aria-labelledby="dashboard-filters">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                <h2 class="h5 mb-0" id="dashboard-filters">Audit queue filters</h2>
+                <span class="badge text-bg-dark">Scope: Your team only</span>
+              </div>
+              <form class="row g-3 no-print">
+                <div class="col-md-3">
+                  <label class="form-label" for="taxYear">Tax year / Année d'imposition</label>
+                  <select class="form-select" id="taxYear">
+                    <option>2025</option>
+                    <option>2024</option>
+                    <option>2023</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label" for="taxpayerType">Taxpayer type / Type de contribuable</label>
+                  <select class="form-select" id="taxpayerType">
+                    <option>Corporation</option>
+                    <option>Individual</option>
+                    <option>Trust</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label" for="riskLevel">Risk level / Niveau de risque</label>
+                  <select class="form-select" id="riskLevel">
+                    <option>High</option>
+                    <option>Medium</option>
+                    <option>Low</option>
+                  </select>
+                </div>
+                <div class="col-md-3">
+                  <label class="form-label" for="statusFilter">Status / État</label>
+                  <select class="form-select" id="statusFilter">
+                    <option>In progress</option>
+                    <option>Planning</option>
+                    <option>Review ready</option>
+                  </select>
+                </div>
+              </form>
+            </div>
+          </section>
+
+          <section class="row g-4 mb-4" aria-label="Dashboard metrics">
+            <div class="col-md-3">
+              <div class="card content-card h-100"><div class="card-body"><div class="data-label">Open files</div><div class="display-6">18</div><p class="mb-0 text-secondary">Assigned to you or your team.</p></div></div>
+            </div>
+            <div class="col-md-3">
+              <div class="card content-card h-100"><div class="card-body"><div class="data-label">High risk</div><div class="display-6">6</div><p class="mb-0 text-secondary">Require documented supervisory review.</p></div></div>
+            </div>
+            <div class="col-md-3">
+              <div class="card content-card h-100"><div class="card-body"><div class="data-label">Pending evidence</div><div class="display-6">9</div><p class="mb-0 text-secondary">Outstanding slips, invoices, or statements.</p></div></div>
+            </div>
+            <div class="col-md-3">
+              <div class="card content-card h-100"><div class="card-body"><div class="data-label">Ready for report</div><div class="display-6">3</div><p class="mb-0 text-secondary">Meets end-product completion criteria.</p></div></div>
+            </div>
+          </section>
+
+          <section class="card content-card" aria-labelledby="assigned-audits-heading">
+            <div class="card-body" data-api-endpoint="/api/audits?assigned=true">
+              <div class="d-flex justify-content-between align-items-center flex-wrap gap-2 mb-3">
+                <h2 class="h5 mb-0" id="assigned-audits-heading">Assigned audits</h2>
+                <div class="small text-secondary">Placeholder API hook: <code>fetch('/api/audits?assigned=true')</code></div>
+              </div>
+              <div class="table-responsive">
+                <table class="table table-hover align-middle">
+                  <thead>
+                    <tr>
+                      <th scope="col">Audit file</th>
+                      <th scope="col">Taxpayer</th>
+                      <th scope="col">Tax year</th>
+                      <th scope="col">Risk</th>
+                      <th scope="col">Status</th>
+                      <th scope="col">Assigned scope</th>
+                      <th scope="col">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td><strong>AU-2025-0148</strong></td>
+                      <td>Northern Equipment Ltd.</td>
+                      <td>2024</td>
+                      <td><span class="badge text-bg-danger risk-chip">High</span></td>
+                      <td>Conducting</td>
+                      <td>Prairie Region Team 3</td>
+                      <td><a class="btn btn-sm btn-outline-primary" href="audit-file.html">Open file</a></td>
+                    </tr>
+                    <tr>
+                      <td><strong>AU-2025-0172</strong></td>
+                      <td>Amélie Roy</td>
+                      <td>2023</td>
+                      <td><span class="badge text-bg-warning risk-chip">Medium</span></td>
+                      <td>Planning</td>
+                      <td>Québec Team 1</td>
+                      <td><a class="btn btn-sm btn-outline-primary" href="tax-return.html">Review return</a></td>
+                    </tr>
+                    <tr>
+                      <td><strong>AU-2025-0214</strong></td>
+                      <td>Pacific Freight ULC</td>
+                      <td>2024</td>
+                      <td><span class="badge text-bg-danger risk-chip">High</span></td>
+                      <td>Review ready</td>
+                      <td>Pacific Team 2</td>
+                      <td><a class="btn btn-sm btn-outline-primary" href="audit-report.html">View report</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>

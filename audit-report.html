@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate">
+    <title>CRA Printable Audit Report</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link href="assets/css/styles.css" rel="stylesheet">
+  </head>
+  <body>
+    <a class="skip-link btn btn-light" href="#main-content">Skip to main content</a>
+    <div class="protected-banner py-2 text-center fw-semibold">Protected B • Printable/exportable report • Confirm secure handling before release</div>
+    <header>
+      <nav class="navbar navbar-expand-lg app-navbar no-print" aria-label="Top navigation">
+        <div class="container-fluid">
+          <a class="navbar-brand fw-semibold" href="index.html">CRA Audit Workspace</a>
+          <div class="d-flex align-items-center gap-2">
+            <span class="navbar-text">Role: Read-only Reviewer</span>
+            <button class="btn btn-outline-light btn-sm" id="localeToggle" type="button">Français</button>
+          </div>
+        </div>
+      </nav>
+    </header>
+
+    <main class="container py-4" id="main-content">
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-3 mb-4 no-print">
+        <div>
+          <h1 class="h2 mb-1">Audit report summary</h1>
+          <p class="mb-0 text-secondary">Report draft for AU-2025-0148 • Ready for supervisory review</p>
+        </div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary" type="button" data-generate-report="AU-2025-0148">Download PDF</button>
+          <button class="btn btn-outline-secondary" type="button" onclick="window.print()">Print</button>
+        </div>
+      </div>
+
+      <div class="alert alert-warning print-warning alert-export no-print" role="alert">
+        Before exporting or printing, verify recipient authorization, secure destination, and retention handling under CRA policy and PIPEDA obligations.
+      </div>
+
+      <section class="card content-card mb-4">
+        <div class="card-body">
+          <div class="row g-3">
+            <div class="col-md-4"><div class="data-label">Taxpayer</div><div class="fs-5">Northern Equipment Ltd.</div></div>
+            <div class="col-md-4"><div class="data-label">Business number</div><div>12*** ***RC0001</div></div>
+            <div class="col-md-4"><div class="data-label">Audit period</div><div>2024 filing year</div></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card content-card mb-4">
+        <div class="card-body">
+          <h2 class="h4">Summary of adjustments and rationale</h2>
+          <div class="table-responsive">
+            <table class="table align-middle">
+              <thead>
+                <tr>
+                  <th scope="col">Area</th>
+                  <th scope="col">Adjustment</th>
+                  <th scope="col">Rationale</th>
+                  <th scope="col">Law / policy reference</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Contractor expenses</td>
+                  <td>+$52,000 income inclusion</td>
+                  <td>Invoices lacked sufficient business-purpose and vendor support.</td>
+                  <td>ITA s.18(1)(a), s.67</td>
+                </tr>
+                <tr>
+                  <td>Shareholder travel</td>
+                  <td>+$32,000 income inclusion</td>
+                  <td>Travel records suggest personal-use component not deductible.</td>
+                  <td>ITA reasonableness principles</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <section class="card content-card mb-4">
+        <div class="card-body">
+          <h2 class="h4">Audit trail excerpt</h2>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">2026-09-21 13:05 • auditor.atremblay • session 8f31 • evidence reviewed and anomaly flagged</li>
+            <li class="list-group-item">2026-09-22 08:42 • auditor.rsingh • session 94ac • note updated and supervisory review requested</li>
+            <li class="list-group-item">2026-09-22 09:10 • teamlead.nguyen • session c171 • report preview opened</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="card content-card">
+        <div class="card-body">
+          <h2 class="h4">Taxpayer communication summary</h2>
+          <p class="mb-3">A fairness package and proposed reassessment summary should be shared through approved CRA channels only. Placeholder links to official correspondence templates and policy memos would be surfaced here.</p>
+          <p class="mb-0 text-secondary" data-report-status>Report status: Draft summary generated; secure PDF generation placeholder pending backend integration.</p>
+        </div>
+      </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <script src="assets/js/app.js"></script>
+  </body>
+</html>
