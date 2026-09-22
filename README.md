@@ -13,7 +13,7 @@ This repository contains a static Bootstrap 5 prototype for a secure CRA auditor
 To preview locally, run:
 
 ```bash
-cd /home/runner/work/ai-cra-tax-demo/ai-cra-tax-demo
+cd ai-cra-tax-demo
 python3 -m http.server 8000
 ```
 

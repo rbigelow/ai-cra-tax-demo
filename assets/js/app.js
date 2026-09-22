@@ -69,6 +69,11 @@
     return Promise.resolve({ ok: true, auditId, downloadUrl: `/api/audits/${auditId}/report` });
   }
 
+  function printAuditReport() {
+    auditLog('audit_report_print_requested', { page: window.location.pathname });
+    window.print();
+  }
+
   function bindSensitiveToggles() {
     document.querySelectorAll('[data-mask-toggle]').forEach((button) => {
       button.addEventListener('click', () => {
@@ -140,12 +145,23 @@
   function bindReportActions() {
     document.querySelectorAll('[data-generate-report]').forEach((button) => {
       button.addEventListener('click', async () => {
+        if (button.dataset.bsTarget) {
+          return;
+        }
         const auditId = button.dataset.generateReport;
         const status = document.querySelector('[data-report-status]');
         const result = await generateAuditReport(auditId);
         if (status && result.ok) {
           status.textContent = `Report ready: ${result.downloadUrl}`;
         }
+      });
+    });
+  }
+
+  function bindPrintActions() {
+    document.querySelectorAll('[data-print-report]').forEach((button) => {
+      button.addEventListener('click', () => {
+        printAuditReport();
       });
     });
   }
@@ -162,6 +178,7 @@
     bindNotes();
     bindRiskFlags();
     bindReportActions();
+    bindPrintActions();
     bindDataLoaders();
   });
 })();
