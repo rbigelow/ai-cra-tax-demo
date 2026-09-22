@@ -40,7 +40,8 @@
       const payload = await response.json();
       target.dataset.loading = 'false';
       target.dataset.lastLoaded = new Date().toISOString();
-      auditLog('audit_data_loaded', { endpoint, recordCount: payload?.length || 1 });
+      const recordCount = Array.isArray(payload) ? payload.length : (payload ? 1 : 0);
+      auditLog('audit_data_loaded', { endpoint, recordCount });
     } catch (error) {
       target.dataset.loading = 'error';
       target.dataset.error = error.message;
@@ -108,7 +109,6 @@
     toggle.addEventListener('click', () => {
       state.locale = state.locale === 'en' ? 'fr' : 'en';
       toggle.textContent = labels[state.locale];
-      document.documentElement.lang = state.locale;
       auditLog('locale_placeholder_toggled', { locale: state.locale });
     });
   }
