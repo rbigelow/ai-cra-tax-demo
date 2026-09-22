@@ -70,6 +70,31 @@
     return Promise.resolve({ ok: true, auditId, downloadUrl: `/api/audits/${auditId}/report` });
   }
 
+  async function loadSensitiveValue(endpoint) {
+    // Backend integration placeholder:
+    // Authorize the reveal request server-side, log the access, and return the unmasked value
+    // only for users with a valid business need and active session.
+    auditLog('sensitive_identifier_reveal_requested', { endpoint });
+
+    try {
+      const response = await fetch(endpoint, {
+        credentials: 'include',
+        headers: {
+          'Accept': 'application/json',
+          'Cache-Control': 'no-store',
+        },
+      });
+      if (!response.ok) {
+        throw new Error(`Reveal failed: ${response.status}`);
+      }
+      const payload = await response.json();
+      return payload.value || 'Secure value unavailable';
+    } catch (error) {
+      auditLog('sensitive_identifier_reveal_placeholder', { endpoint, message: error.message });
+      return 'Full value available after secure backend integration.';
+    }
+  }
+
   function printAuditReport() {
     auditLog('audit_report_print_requested', { page: window.location.pathname });
     window.print();
@@ -77,7 +102,7 @@
 
   function bindSensitiveToggles() {
     document.querySelectorAll('[data-mask-toggle]').forEach((button) => {
-      button.addEventListener('click', () => {
+      button.addEventListener('click', async () => {
         const target = document.getElementById(button.dataset.maskToggle);
         if (!target) {
           return;
@@ -85,10 +110,22 @@
 
         const isHidden = target.hasAttribute('hidden');
         if (isHidden) {
+          if (!target.dataset.loaded && button.dataset.sensitiveEndpoint) {
+            target.textContent = 'Loading secure value…';
+            target.removeAttribute('hidden');
+            const revealedValue = await loadSensitiveValue(button.dataset.sensitiveEndpoint);
+            target.textContent = revealedValue;
+            target.dataset.loaded = 'true';
+          } else {
+            target.removeAttribute('hidden');
+          }
           target.removeAttribute('hidden');
           button.setAttribute('aria-pressed', 'true');
           button.textContent = button.dataset.hideLabel || 'Hide';
-          auditLog('sensitive_identifier_revealed', { target: button.dataset.maskToggle });
+          auditLog('sensitive_identifier_revealed', {
+            target: button.dataset.maskToggle,
+            source: button.dataset.sensitiveEndpoint || 'inline-placeholder',
+          });
           return;
         }
 
@@ -145,9 +182,6 @@
   function bindReportActions() {
     document.querySelectorAll('[data-generate-report]').forEach((button) => {
       button.addEventListener('click', async () => {
-        if (button.dataset.bsTarget) {
-          return;
-        }
         const auditId = button.dataset.generateReport;
         const status = button.dataset.statusTarget
           ? document.getElementById(button.dataset.statusTarget)
